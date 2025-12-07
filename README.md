@@ -21,9 +21,11 @@
 
 ## 🛠 Tech Stack
 
-- **Frontend:** React, CSS (with animations)  
+- **Frontend:** React, Tailwind-CSS, Material UI 
 - **API:** CoinGecko API  
-- **Deployment:** Vercel  
+- **Charting:** Chart.js  
+- **State Management:** Context API  
+- **Deployment:** Vercel
 
 ---
 
