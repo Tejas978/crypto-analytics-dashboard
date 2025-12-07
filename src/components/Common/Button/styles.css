@@ -1,0 +1,56 @@
+/* --- UPGRADE: CSS for Button Component --- */
+
+/* Base styles for both buttons */
+.btn-filled,
+.btn-outlined {
+  padding: 0.75rem 1.5rem;
+  border-radius: 2rem; /* Modern pill shape */
+  font-size: 1rem;
+  font-weight: 600;
+  font-family: "Inter", sans-serif;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  min-width: 150px; /* Consistent width */
+  text-align: center;
+}
+
+/* --- Filled Button (Primary) --- */
+.btn-filled {
+  background-color: var(--blue);
+  color: var(--white);
+  border: 2px solid var(--blue);
+  /* Futuristic glow */
+  box-shadow: 0 0 10px rgba(0, 122, 255, 0.5);
+}
+
+.btn-filled:hover {
+  background-color: #0056b3; /* Darker blue */
+  border-color: #0056b3;
+  box-shadow: 0 0 15px rgba(0, 122, 255, 0.7);
+  transform: translateY(-2px);
+}
+
+/* --- Outlined Button (Secondary) --- */
+.btn-outlined {
+  background-color: transparent;
+  color: var(--white);
+  border: 2px solid var(--blue);
+}
+
+.btn-outlined:hover {
+  background-color: var(--blue); /* Fill on hover */
+  color: var(--white);
+  box-shadow: 0 0 10px rgba(0, 122, 255, 0.5);
+  transform: translateY(-2px);
+}
+
+/* --- Disabled State --- */
+.btn-filled:disabled,
+.btn-outlined:disabled {
+  background-color: var(--grey);
+  border-color: var(--grey);
+  color: rgba(255, 255, 255, 0.5);
+  box-shadow: none;
+  cursor: not-allowed;
+  transform: none;
+}

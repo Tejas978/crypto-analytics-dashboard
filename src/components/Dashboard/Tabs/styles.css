@@ -1,0 +1,78 @@
+/* --- UPGRADE: CSS for Modern/Futuristic Tabs --- */
+
+.tabs-container {
+  width: 90%;
+  max-width: 1200px;
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+
+/* --- FUTURISTIC: Glassmorphism TabList --- */
+.tablist-glass {
+  background-color: rgba(28, 28, 30, 0.7);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 0.75rem;
+  margin: 1.5rem 0;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  display: flex; /* Added for placeholder */
+  justify-content: space-around; /* Added for placeholder */
+}
+
+/* Style for the MUI Tab indicator (the blue line) */
+.MuiTabs-indicator {
+  background-color: var(--blue) !important;
+  height: 3px !important;
+  border-radius: 2px;
+  box-shadow: 0 0 10px var(--blue); /* Glow */
+}
+
+/* Style for the individual Tab buttons */
+.MuiTab-root {
+  color: var(--grey) !important;
+  font-family: "Inter", sans-serif !important;
+  font-weight: 600 !important;
+  transition: color 0.3s ease !important;
+}
+
+.MuiTab-root:hover {
+  color: var(--white) !important;
+}
+
+/* Style for the Active Tab button */
+.Mui-selected {
+  color: var(--white) !important;
+  text-shadow: 0 0 5px var(--blue); /* Subtle glow for active text */
+}
+
+/* --- Panel Content Layout --- */
+.tabPanel {
+  padding: 0 !important; /* Remove default MUI padding */
+  box-sizing: border-box;
+}
+
+.grid-flex {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1.5rem;
+  width: 100%;
+}
+
+.list-flex {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 1rem; /* Add gap between list items */
+}
+
+.no-items-div {
+  padding: 2rem;
+  width: 100%;
+  color: var(--white); /* Ensure text is visible */
+}
+
+.no-items-div h1 {
+  font-size: 1.5rem; /* Make heading smaller */
+}

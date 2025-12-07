@@ -1,0 +1,50 @@
+/* --- UPGRADE: CSS for SelectDays Component --- */
+
+.select-days-flex {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.select-days-flex p {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--white);
+  margin: 0;
+}
+
+/* --- PROFESSIONAL: MUI Select Overrides --- */
+.select-days {
+  height: 2.5rem;
+  color: var(--white) !important;
+  min-width: 100px; /* Consistent width */
+}
+
+/* Target the outline */
+.select-days .MuiOutlinedInput-notchedOutline {
+  border-color: var(--grey) !important;
+  transition: border-color 0.3s ease;
+}
+
+/* Target the icon */
+.select-days .MuiSvgIcon-root {
+  color: var(--white) !important;
+}
+
+/* Hover state */
+.select-days:hover .MuiOutlinedInput-notchedOutline {
+  border-color: var(--blue) !important;
+  box-shadow: 0 0 5px rgba(0, 122, 255, 0.5); /* Glow on hover */
+}
+
+/* --- Responsive (for ComparePage context) --- */
+@media (max-width: 768px) {
+  .select-days-flex {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.5rem;
+  }
+  .select-days {
+    width: 100%;
+  }
+}
