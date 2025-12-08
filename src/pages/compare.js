@@ -176,6 +176,8 @@ body {
   border-radius: 0.75rem;
   padding: 1rem;
   transition: all 0.3s;
+  word-break: break-word;
+  overflow-wrap: break-word;
 }
 
 .stat-card:hover {
