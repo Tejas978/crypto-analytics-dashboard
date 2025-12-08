@@ -1,4 +1,6 @@
+// Header.js
 import React, { useEffect, useState } from "react";
+import MobileDrawer from "./Drawer.js";
 import {
   Moon,
   Sun,
@@ -6,50 +8,37 @@ import {
   GitCompare,
   Star,
   LayoutDashboard,
-  Menu,
-  X,
 } from "lucide-react";
 
 function Header() {
-  // ✅ Default is ALWAYS DARK (initial load)
-  const [darkMode, setDarkMode] = useState(true);
-
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  // Single dark mode state shared between desktop and mobile
+  const [darkMode, setDarkMode] = useState(
+    localStorage.getItem("theme") === "dark"
+  );
   const [scrolled, setScrolled] = useState(false);
 
-  // ----------------------------------------------------------
-  // INITIALIZE THEME ON FIRST LOAD
-  // ----------------------------------------------------------
   useEffect(() => {
-    // Always start with dark mode
-    localStorage.setItem("theme", "dark");
-    document.documentElement.setAttribute("data-theme", "dark");
+    document.documentElement.setAttribute(
+      "data-theme",
+      darkMode ? "dark" : "light"
+    );
 
     const handleScroll = () => setScrolled(window.scrollY > 10);
     window.addEventListener("scroll", handleScroll);
 
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  }, [darkMode]);
 
-  // ----------------------------------------------------------
-  // THEME TOGGLE FUNCTION
-  // ----------------------------------------------------------
-  const changeMode = () => {
+  const toggleTheme = () => {
     const newMode = !darkMode;
     setDarkMode(newMode);
-
-    if (newMode) {
-      localStorage.setItem("theme", "dark");
-      document.documentElement.setAttribute("data-theme", "dark");
-    } else {
-      localStorage.setItem("theme", "light");
-      document.documentElement.setAttribute("data-theme", "light");
-    }
+    localStorage.setItem("theme", newMode ? "dark" : "light");
+    document.documentElement.setAttribute(
+      "data-theme",
+      newMode ? "dark" : "light"
+    );
   };
 
-  // ----------------------------------------------------------
-  // THEME COLORS
-  // ----------------------------------------------------------
   const theme = {
     bg: darkMode
       ? scrolled
@@ -58,23 +47,13 @@ function Header() {
       : scrolled
         ? "rgba(255, 255, 255, 0.85)"
         : "rgba(255, 255, 255, 0.95)",
-
     border: darkMode ? "rgba(255,255,255,0.07)" : "rgba(0,0,0,0.07)",
     text: darkMode ? "#e5e7eb" : "#1f2937",
-
     logoGradient: "linear-gradient(135deg, #3b82f6, #1e40af)",
     logoBg: "linear-gradient(135deg, #1e3a8a, #1e40af)",
     logoIcon: "#fff",
-
-    navHoverBg: darkMode ? "rgba(59,130,246,0.15)" : "rgba(59,130,246,0.10)",
-    navHoverText: "#3b82f6",
-
     btnBg: "linear-gradient(135deg, #3b82f6, #1e40af)",
     btnShadow: "0 2px 10px rgba(59,130,246,0.25)",
-    btnHoverShadow: "0 4px 14px rgba(59,130,246,0.35)",
-
-    toggleBg: darkMode ? "rgba(25,35,55,0.5)" : "rgba(229,236,255,0.6)",
-    toggleBorder: darkMode ? "rgba(255,255,255,0.08)" : "rgba(0,0,0,0.08)",
   };
 
   const navLinks = [
@@ -127,13 +106,11 @@ function Header() {
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
-                  fontWeight: 700,
                   color: theme.logoIcon,
                 }}
               >
                 ₿
               </span>
-
               <span
                 style={{
                   background: theme.logoGradient,
@@ -143,102 +120,96 @@ function Header() {
                   fontSize: "1.38rem",
                 }}
               >
-                CryptoTracker
+                CryptoVision
               </span>
             </h1>
           </a>
 
-          {/* RIGHT SIDE */}
-          <div style={{ display: "flex", alignItems: "center", gap: "2rem" }}>
-            <div className="desktop-nav" style={{ display: "flex", gap: "1rem" }}>
-              {navLinks.map((link) => (
-                <a
-                  key={link.href}
-                  href={link.href}
-                  style={{
-                    textDecoration: "none",
-                    padding: ".6rem 1rem",
-                    borderRadius: "10px",
-                    color: theme.text,
-                    display: "flex",
-                    alignItems: "center",
-                    gap: ".5rem",
-                    fontWeight: 500,
-                    transition: "all .2s",
-                  }}
-                >
-                  <link.icon size={18} />
-                  {link.label}
-                </a>
-              ))}
-
-              {/* BUTTON */}
-              <a href="/dashboard" style={{ textDecoration: "none" }}>
-                <button
-                  style={{
-                    padding: ".6rem 1.25rem",
-                    background: theme.btnBg,
-                    color: "#fff",
-                    border: "none",
-                    borderRadius: "10px",
-                    fontSize: ".95rem",
-                    display: "flex",
-                    alignItems: "center",
-                    gap: ".5rem",
-                    cursor: "pointer",
-                    boxShadow: theme.btnShadow,
-                    transition: "all .2s",
-                  }}
-                >
-                  <LayoutDashboard size={18} />
-                  Dashboard
-                </button>
-              </a>
-
-              {/* THEME SWITCH */}
-              <button
-                onClick={changeMode}
+          {/* DESKTOP NAV */}
+          <div
+            className="desktop-nav"
+            style={{
+              display: "flex",
+              gap: "1rem",
+              alignItems: "center",
+            }}
+          >
+            {navLinks.map((link) => (
+              <a
+                key={link.href}
+                href={link.href}
                 style={{
-                  padding: ".6rem",
-                  background: theme.toggleBg,
-                  border: `1px solid ${theme.toggleBorder}`,
+                  textDecoration: "none",
+                  padding: ".6rem 1rem",
                   borderRadius: "10px",
                   color: theme.text,
+                  display: "flex",
+                  alignItems: "center",
+                  gap: ".5rem",
+                  fontWeight: 500,
+                  transition: "all .2s",
                 }}
               >
-                {darkMode ? <Sun size={20} /> : <Moon size={20} />}
-              </button>
-            </div>
+                <link.icon size={18} />
+                {link.label}
+              </a>
+            ))}
 
-            {/* MOBILE MENU BUTTON */}
+            {/* DASHBOARD BUTTON */}
+            <a href="/dashboard" style={{ textDecoration: "none" }}>
+              <button
+                style={{
+                  padding: ".6rem 1.25rem",
+                  background: theme.btnBg,
+                  color: "#fff",
+                  border: "none",
+                  borderRadius: "10px",
+                  fontSize: ".95rem",
+                  display: "flex",
+                  alignItems: "center",
+                  gap: ".5rem",
+                  cursor: "pointer",
+                  boxShadow: theme.btnShadow,
+                  transition: "all .2s",
+                }}
+              >
+                <LayoutDashboard size={18} />
+                Dashboard
+              </button>
+            </a>
+
+            {/* THEME TOGGLE */}
             <button
-              className="mobile-menu-btn"
-              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              onClick={toggleTheme}
               style={{
-                display: "none",
                 padding: ".6rem",
-                background: theme.toggleBg,
-                border: `1px solid ${theme.toggleBorder}`,
+                background: darkMode
+                  ? "rgba(255,255,255,0.05)"
+                  : "rgba(0,0,0,0.05)",
+                border: "1px solid rgba(255,255,255,0.08)",
                 borderRadius: "10px",
                 color: theme.text,
               }}
             >
-              {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+              {darkMode ? <Sun size={20} /> : <Moon size={20} />}
             </button>
+          </div>
+
+          {/* MOBILE DRAWER */}
+          <div className="mobile-nav">
+            <MobileDrawer darkMode={darkMode} setDarkMode={setDarkMode} />
           </div>
         </nav>
       </header>
 
       <style>{`
-        * {
-          transition: background-color .25s, color .25s, border-color .25s;
+        * { transition: background-color .25s, color .25s, border-color .25s; }
+        @media (max-width: 768px) { 
+          .desktop-nav { display: none !important; } 
+          .mobile-nav { display: block !important; } 
         }
-        @media (max-width: 768px) {
-          .desktop-nav { display: none !important; }
-          .mobile-menu-btn { display: flex !important; }
-        }
-        @media (min-width: 769px) {
-          .mobile-menu { display: none !important; }
+        @media (min-width: 769px) { 
+          .mobile-nav { display: none !important; } 
         }
       `}</style>
     </>

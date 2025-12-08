@@ -1016,88 +1016,54 @@ function CoinPage() {
     <div style={{ minHeight: "100vh", background: "var(--black)" }}>
       <Header />
 
-      {/* Info banner for developers */}
-      {window.location.pathname === '/coin/bitcoin' && (
-        <div style={{
-          background: "rgba(99, 102, 241, 0.1)",
-          border: "1px solid rgba(99, 102, 241, 0.3)",
-          borderRadius: "12px",
-          padding: "1rem 1.5rem",
-          margin: "0 2rem 2rem",
-          maxWidth: "1200px",
-          marginLeft: "auto",
-          marginRight: "auto"
-        }}>
-          <p style={{ color: "var(--white)", fontSize: "0.9rem", margin: 0, marginBottom: "0.5rem" }}>
-            💡 <strong>Tip:</strong> Change the URL to view other coins. Try: <code style={{
-              background: "rgba(0, 0, 0, 0.3)",
-              padding: "0.2rem 0.5rem",
-              borderRadius: "4px",
-              margin: "0 0.25rem"
-            }}>/coin/ethereum</code>,
-            <code style={{
-              background: "rgba(0, 0, 0, 0.3)",
-              padding: "0.2rem 0.5rem",
-              borderRadius: "4px",
-              margin: "0 0.25rem"
-            }}>/coin/solana</code>,
-            <code style={{
-              background: "rgba(0, 0, 0, 0.3)",
-              padding: "0.2rem 0.5rem",
-              borderRadius: "4px",
-              margin: "0 0.25rem"
-            }}>/coin/cardano</code>
-          </p>
-          <p style={{ color: "var(--grey)", fontSize: "0.85rem", margin: "0.5rem 0 0 0" }}>
-            🚀 <strong>Performance:</strong> Data is cached for faster loading. API requests are queued to prevent rate limits.
-          </p>
-        </div>
-      )}
-
       {error ? (
-        <ErrorMessage message={error} onRetry={handleRetry} />
-      ) : loading ? (
-        <Loader />
-      ) : coin ? (
-        <div style={{ maxWidth: "1200px", margin: "0 auto", padding: "0 2rem" }}>
-          <div className="grey-wrapper fade-in">
-            <List coin={coin} delay={0.1} />
-          </div>
+  <ErrorMessage message={error} onRetry={handleRetry} />
+) : loading ? (
+  <Loader />
+) : coin ? (
+  <div style={{ maxWidth: "1200px", margin: "0 auto", padding: "0 2rem" }}>
+    {/* Coin List */}
+    <div className="grey-wrapper fade-in">
+      <List coin={coin} delay={0.1} />
+    </div>
 
-          <div className="grey-wrapper fade-in" style={{ animationDelay: "0.2s" }}>
-            <div style={{
-              display: "flex",
-              justifyContent: "space-between",
-              alignItems: "center",
-              flexWrap: "wrap",
-              gap: "1rem",
-              marginBottom: "1.5rem"
-            }}>
-              <SelectDays
-                days={days}
-                handleDaysChange={handleDaysChange}
-                disabled={chartLoading}
-              />
-              <PriceToggle
-                handlePriceTypeChange={handlePriceTypeChange}
-                priceType={priceType}
-                disabled={chartLoading}
-              />
-            </div>
-            <LineChart
-              chartData={chartData}
-              priceType={priceType}
-              isLoading={chartLoading}
-            />
-          </div>
+    {/* Chart & Controls */}
+    <div className="grey-wrapper fade-in" style={{ animationDelay: "0.2s" }}>
+      <div style={{
+        display: "flex",
+        justifyContent: "space-between",
+        alignItems: "center",
+        flexWrap: "wrap",
+        gap: "1rem",
+        marginBottom: "1.5rem"
+      }}>
+        <SelectDays
+          days={days}
+          handleDaysChange={handleDaysChange}
+          disabled={chartLoading}
+        />
+        <PriceToggle
+          handlePriceTypeChange={handlePriceTypeChange}
+          priceType={priceType}
+          disabled={chartLoading}
+        />
+      </div>
+      <LineChart
+        chartData={chartData}
+        priceType={priceType}
+        isLoading={chartLoading}
+      />
+    </div>
 
-          <CoinInfo name={coin.name} desc={coin.desc} />
-        </div>
-      ) : (
-        <div style={{ textAlign: "center", padding: "4rem", color: "var(--grey)" }}>
-          No coin data available
-        </div>
-      )}
+    {/* Coin Description */}
+    <CoinInfo name={coin.name} desc={coin.desc} />
+  </div>
+) : (
+  <div style={{ textAlign: "center", padding: "4rem", color: "var(--grey)" }}>
+    No coin data available
+  </div>
+)}
+
 
       <Footer />
     </div>
