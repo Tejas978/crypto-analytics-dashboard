@@ -2,7 +2,6 @@
 
 [![React](https://img.shields.io/badge/React-17.0.2-blue?logo=react)](https://reactjs.org/) 
 [![Vercel](https://img.shields.io/badge/Deployment-Vercel-black?logo=vercel)](https://vercel.com/) 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 **Crypto Vision** is a modern **crypto tracker** built with **React**, providing real-time cryptocurrency insights through an interactive, sleek, and responsive interface. The app integrates with the **CoinGecko API** and is fully optimized for deployment on **Vercel**.
 
@@ -115,16 +114,3 @@ Contributions are welcome! Follow these steps:
 
 ---
 
-## 📄 License
-
-This project is licensed under the **MIT License**.
-See the [LICENSE](LICENSE) file for details.
-
----
-
-**Crypto Vision** – Track, Compare, and Visualize Cryptocurrency in Real-Time!
-
-```
-
-Do you want me to do that?
-```
